@@ -1,4 +1,4 @@
-use std::{fmt::Error, os::macos::raw, string::FromUtf8Error};
+use std::string::FromUtf8Error;
 
 fn main() {
     let input = [
@@ -17,7 +17,7 @@ fn main() {
         let word: String = str_to_hex(&raw_word);
 
         for i in 0..input.len() {
-            for j in (i + 1)..input.len() {
+            for j in (i + 1)..input.len() - 1 {
                 let str = xor_str(input[i], input[j]);
                 for k in 0..str.len() - word.len() {
                     let res = hex_to_str(&xor_str(&str[k..], &word));
@@ -41,11 +41,11 @@ fn main() {
     let mut key = input[input.len() - 1].to_owned();
     for (i, offset, value) in solution {
         let partial_key = xor_str(&input[i][offset..], &str_to_hex(&value));
-        key.replace_range(offset..offset + value.len(), &partial_key);
+        key.replace_range(offset..(offset + partial_key.len()), &partial_key);
     }
 
     print!("   ");
-    for i in 0..input[input.len() - 1].len() {
+    for i in 0..input[input.len() - 1].len() / 2 {
         print!("{}", i % 10);
     }
     println!();
