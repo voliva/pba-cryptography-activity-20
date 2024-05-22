@@ -36,7 +36,10 @@ fn main() {
         (0, 70, " brin"),
         (0, 110, "lout "),
         (1, 188, " but "),
-        // (4, 66, "complex"),
+        (4, 32 * 2, " complex"),
+        (8, 31 * 2, "version"),
+        (6, 29 * 2, "custodial"),
+        // Keep expanding in either direction by running cargo run and taking a look at new possibilities
     ];
     let mut key = input[input.len() - 1].to_owned();
     for (i, offset, value) in solution {
